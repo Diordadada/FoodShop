@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="classes.vo.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="com.mysql.cj.Session" %>
 
 <html lang="zh">
 <head>
@@ -56,12 +57,19 @@
 </head>
 <body>
 
+<%-- 在进入导航时将个人信息保存入 session 中 --%>
+<%
+    if((String) session.getAttribute("phone") == null && session.getAttribute("balance") == null)
+        response.sendRedirect("user_info");
+    String name = (String) session.getAttribute("name");
+%>
+
 <div class="nav-container">
     <h1>食材订购系统</h1>
-    <p class="welcome-message">欢迎访问，用户名</p>
-    <a href="personal_center.jsp" class="nav-button">个人中心</a>
+    <p class="welcome-message">欢迎访问，<%=name%></p>
+    <a href="user_center.jsp" class="nav-button">个人中心</a>
     <a href="food_market.html.jsp" class="nav-button">食材市场</a>
-    <a href="my_orders.html.jsp" class="nav-button">我的订单</a>
+    <a href="books.jsp" class="nav-button">我的订单</a>
 </div>
 
 </body>

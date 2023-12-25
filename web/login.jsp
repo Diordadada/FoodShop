@@ -75,7 +75,7 @@
 
 <div class="login-container">
     <h1>食材订购系统</h1>
-    <form action="your_login_handler.php" method="post">
+    <form action="login" method="post">
         <div class="input-group">
             <label for="username">用户名：</label>
             <input type="text" id="username" name="name" placeholder="请输入店铺名" required>
