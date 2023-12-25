@@ -56,7 +56,6 @@
             font-size: 16px;
             color: #555;
         }
-
     </style>
 </head>
 <body>
@@ -93,7 +92,6 @@
         }
     %>
     <!-- Add more orders as needed -->
-
 </div>
 
 </body>
