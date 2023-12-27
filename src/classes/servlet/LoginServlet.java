@@ -1,7 +1,6 @@
 package classes.servlet;
 
 import classes.util.JdbcUtil;
-import classes.vo.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,12 +8,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "loginServlet", value = "/login")
-public class loginServlet extends HttpServlet {
+@WebServlet(name = "LoginServlet", value = "/login")
+public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req, resp);
@@ -41,16 +39,12 @@ public class loginServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        if(turePwd != null) System.out.println(turePwd);
-        else System.out.println("not find");
-
         if(pwd.equals(turePwd)) {
             isLogin = true;
         }
 
         if(isLogin) {
-            req.getSession().setAttribute("name", name); // 保存 session
-            req.getSession().setAttribute("pwd", pwd); // 保存 session
+            req.getSession().setAttribute("name", name); // 保存 sessions
 
             resp.sendRedirect("user_nav.jsp"); // 跳转
         } else {

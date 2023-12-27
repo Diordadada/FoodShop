@@ -22,25 +22,25 @@ public class UserInfoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = (String) req.getSession().getAttribute("name");
-        String phone = null;
-        Double balance = 0.0;
+        User user = new User();
 
         try {
             String sql = "select * from user where name = ?";
             List<Map<String,Object>> list = JdbcUtil.executeQuery(sql, name);
             if(!list.isEmpty()) {
                 for(Map map : list) {
-                    phone = (String)map.get("phone");
-                    balance = ((Number) map.get("balance")).doubleValue();
+                    user.setName(name);
+                    user.setPhone((String)map.get("phone"));
+                    user.setPwd((String)map.get("pwd"));
+                    user.setBalance(((Number) map.get("balance")).doubleValue());
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        req.getSession().setAttribute("phone", phone);
-        req.getSession().setAttribute("balance", balance);
+        req.getSession().setAttribute("user", user);
 
-        resp.sendRedirect("user_nav.jsp");
+        resp.sendRedirect("user_center.jsp");
     }
 }

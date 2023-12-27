@@ -76,18 +76,18 @@
 
 <div class="register-container">
     <h1>食材订购系统 - 注册</h1>
-    <form action="your_register_handler.php" method="post">
+    <form action="register" method="post">
         <div class="input-group">
-            <label for="username">用户名：</label>
-            <input type="text" id="username" name="username" placeholder="请输入店铺名" required>
+            <label for="name">店铺名：</label>
+            <input type="text" id="name" name="name" placeholder="请输入店铺名" required>
         </div>
         <div class="input-group">
-            <label for="username">联系电话：</label>
+            <label for="phone">联系电话：</label>
             <input type="text" id="phone" name="phone" placeholder="请输入联系电话" required>
         </div>
         <div class="input-group">
-            <label for="password">密码：</label>
-            <input type="password" id="password" name="password" placeholder="请输入密码" required>
+            <label for="pwd">密码：</label>
+            <input type="password" id="pwd" name="pwd" placeholder="请输入密码" required>
         </div>
         <button type="submit" class="register-button">注册</button>
     </form>

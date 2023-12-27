@@ -63,6 +63,7 @@
 <%
     if(session.getAttribute("bookList") == null) {
         response.sendRedirect("book_list");
+        return;
     }
     List<Book> bookList = (List<Book>) session.getAttribute("bookList");
 %>
@@ -93,6 +94,10 @@
     %>
     <!-- Add more orders as needed -->
 </div>
+
+<%
+    session.removeAttribute("bookList");
+%>
 
 </body>
 </html>

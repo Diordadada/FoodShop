@@ -1,4 +1,4 @@
-食材订购系统：
+食材订购系统（完整版）：
 角色：
 1、店铺
 2、食材供应商（管理员）
@@ -20,7 +20,7 @@
 
 数据库：
 1、user(店铺)：
-name（店铺名）
+name（店铺名）：varchar(50)
 phone(联系电话)：varchar(50)
 pwd(密码)：varchar(50)
 balance(余额)：double
@@ -36,24 +36,59 @@ path（图片路径）：varchar(50)
 id（订单号）：varchar(50)
 user（订购者名）：varchar(50)
 food（订购食材名）：varchar(50)
-time（订购时间）：varchar(50)
 num（订购数量）：int
-remark（备注）：varchar(500)
+amount（订购金额）：double
+time（订购时间）：varchar(50)
 
 4、admin（管理员）
 name（管理员名）：varchar(50)
-mid（账号）：varchar(50)
 password（密码）：varchar(50)
 
 5、add（进货记录）
 id（进货号）：varchar(50)
 admin（进货管理员名）：varchar(50)
 food（进货食材名）：varchar(50)
-time（进货时间）：varchar(50)
 num（进货数量）：int
-remark（备注）：varchar(500)
+amount（进货金额）
+time（进货时间）：varchar(50)
 
 
-编码问题：
-1、后端拿到前端的数据，能否通过点击事件，发送对应的属性到后端servlet （通过按钮绑定点击事件+ajax）
-2、前端能否拿到后端的数据，在前端渲染页面。（通过设置属性可以实现session.setAeeribute()）
+
+食材订购系统（阉割版）：
+角色：
+1、店铺
+
+功能实现：
+面向店铺：
+1、账号管理
+	登录和注册
+2、查看个人信息
+
+3、查看食材
+	
+4、订购食材
+	
+5、查看订单
+
+
+数据库：
+1、user(店铺)：
+name（店铺名）：varchar(50)
+phone(联系电话)：varchar(50)
+pwd(密码)：varchar(50)
+balance(余额)：double
+
+2、food（食材）：
+name（食材名）：varchar(50)
+style（食材种类）：varchar(50)
+price（食材价格）：double
+stock（库存）：int
+path（图片路径）：varchar(50)
+
+3、book（订单）
+id（订单号）：varchar(50)
+user（订购者名）：varchar(50)
+food（订购食材名）：varchar(50)
+num（订购数量）：int
+amount（订购金额）：double
+time（订购时间）：varchar(50)

@@ -1,6 +1,8 @@
 package classes.servlet;
 
 import classes.util.JdbcUtil;
+import classes.util.MyRandom;
+import classes.util.SystemDateTime;
 import classes.vo.Food;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,13 +24,16 @@ public class BookFoodServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String data = req.getParameter("food");
-
+        int num = Integer.parseInt(req.getParameter("num"));
+        String foodName = req.getParameter("food");
         Food food = new Food();
+        String id = MyRandom.generateRandomString(8);
+        String user = (String) req.getSession().getAttribute("name");
+        String time = SystemDateTime.getCurrentDateTime();
 
         try {
             String sql = "select * from food where name = ?";
-            List<Map<String,Object>> list = JdbcUtil.executeQuery(sql, data);
+            List<Map<String,Object>> list = JdbcUtil.executeQuery(sql, foodName);
             if(!list.isEmpty()) {
                 for(Map map : list) {
                     food.setName((String) map.get("name"));
@@ -38,13 +43,20 @@ public class BookFoodServlet extends HttpServlet {
                     food.setPath((String) map.get("path"));
                 }
             }
+            Double amount = num * food.getPrice();
+
+            sql = "update food set stock = stock - ? where name = ?";
+            JdbcUtil.executeUpdate(sql, num, food.getName());
+
+            sql = "update user set balance = balance - ? where name = ?";
+            JdbcUtil.executeUpdate(sql, amount, user);
+
+            sql = "insert into book (id, user, food, num, amount, time) values(?,?,?,?,?,?)";
+            JdbcUtil.executeUpdate(sql, id, user, food.getName(), num, amount, time);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        req.getSession().setAttribute("bookFood", food);
-
-        resp.sendRedirect("books.jsp");
+        resp.sendRedirect("register_success.jsp");
     }
-
 }

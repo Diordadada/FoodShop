@@ -26,7 +26,6 @@ public class JdbcUtil {
     }
 
     public static Connection getConnection() throws SQLException {
-        System.out.println("JDBC URL: " + url);
         Connection connection = DriverManager.getConnection(url, user, password);
         return connection;
     }

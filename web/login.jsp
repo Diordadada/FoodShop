@@ -8,7 +8,9 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f1f1f1;
+            background-image: url('images/紫天海边.png'); /* 设置背景图片的URL */
+            background-size: cover;
+            background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,10 +20,12 @@
         .login-container {
             width: 30%;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(240, 248, 255, 0.5); /* 背景颜色，包括透明度 */
+            backdrop-filter: blur(5px); /* 虚化效果，值可以调整 */
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
+            opacity: 1;
         }
 
         h1 {
@@ -46,6 +50,7 @@
             font-size: 14px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            backdrop-filter: blur(5px); /* 对输入框进行虚化，值可以调整 */
         }
 
         .login-button {

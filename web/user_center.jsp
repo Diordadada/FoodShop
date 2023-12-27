@@ -71,21 +71,22 @@
 <body>
 
 <%
-    String name = (String) session.getAttribute("name");
-    String phone = (String) session.getAttribute("phone");
-    String pwd = (String) session.getAttribute("pwd");
-    Double balance = (Double) session.getAttribute("balance");
+    if(session.getAttribute("user") == null) {
+        response.sendRedirect("user_info");
+        return;
+    }
+    User user = (User) session.getAttribute("user");
 %>
 
 <div class="profile-container">
     <h1>个人中心</h1>
     <div class="info-group">
         <label>商铺名：</label>
-        <span class="info-value"><%=name%></span>
+        <span class="info-value"><%=user.getName()%></span>
     </div>
     <div class="info-group">
         <label>联系电话：</label>
-        <span class="info-value"><%=phone%></span>
+        <span class="info-value"><%=user.getPhone()%></span>
     </div>
     <div class="info-group">
         <label>密码：</label>
@@ -94,10 +95,14 @@
     </div>
     <div class="info-group">
         <label>账户余额：</label>
-        <span class="info-value">$<%=balance%></span>
+        <span class="info-value">$<%=user.getBalance()%></span>
         <a href="#" class="edit-link">充值</a>
     </div>
 </div>
+
+<%
+    session.removeAttribute("user");
+%>
 
 </body>
 </html>

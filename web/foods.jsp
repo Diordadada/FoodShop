@@ -98,6 +98,7 @@
 <%
     if(session.getAttribute("foodList") == null) {
         response.sendRedirect("food_list");
+        return;
     }
     List<Food> foodList = (List<Food>) session.getAttribute("foodList");
 %>
@@ -118,6 +119,7 @@
         }
     %>
 
+<%--  弹出框  --%>
     <div class="overlay" id="overlay">
         <div class="popup" id="popup">
             <img id="popup-image" src="" alt="Food Image" style="max-width: 100%; max-height: 300px; border-radius: 8px;">
@@ -125,10 +127,10 @@
             <p id="popup-type">食材类型</p>
             <p id="popup-price">价格：¥</p>
             <p id="popup-stock">库存量：</p>
-            <form id="order-form">
+            <form id="book-food" action="book_food" method="post">
                 <label for="quantity">订购数量：</label>
-                <input type="number" id="quantity" name="quantity" required>
-                <input type="hidden" id="food-name" name="food-name" value="">
+                <input type="number" id="quantity" name="num" required>
+                <input type="hidden" id="food" name="food" value="">
                 <br><br>
                 <button type="button" onclick="closePopup()">取消</button>
                 <button type="submit">订购</button>
@@ -139,34 +141,6 @@
 </div>
 
 </body>
-
-<%--<script>--%>
-<%--    // 使用JavaScript监听ingredient-card点击事件--%>
-<%--    var ingredientCards = document.querySelectorAll(".ingredient-card");--%>
-
-<%--    ingredientCards.forEach(function(card) {--%>
-<%--        card.addEventListener("click", function() {--%>
-<%--            // 获取ingredient-card的特定属性值--%>
-<%--            var data = this.getAttribute("data");--%>
-
-<%--            // 发送Ajax请求到Servlet页面--%>
-<%--            var xhr = new XMLHttpRequest();--%>
-<%--            var url = "book"; // 替换成你的Servlet的URL--%>
-<%--            xhr.open("POST", url, true);--%>
-<%--            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");--%>
-<%--            xhr.onreadystatechange = function () {--%>
-<%--                if (xhr.readyState == 4 && xhr.status == 200) {--%>
-<%--                    // 处理Servlet响应--%>
-<%--                    console.log(xhr.responseText);--%>
-<%--                    // 刷新页面或执行其他操作--%>
-<%--                }--%>
-<%--            };--%>
-<%--            // 发送属性值作为参数--%>
-<%--            xhr.send("data=" + data);--%>
-<%--        });--%>
-<%--    });--%>
-
-<%--</script>--%>
 
 <script>
     // 获取所有 ingredient-card 元素
@@ -189,7 +163,7 @@
             document.getElementById("popup-stock").innerText = stock;
             document.getElementById("popup-image").src = imageSrc;
             // 设置表单默认值（食材名）
-            document.getElementById("price").value = name;
+            document.getElementById("food").value = name;
 
             // 显示弹出框
             document.getElementById("overlay").style.display = "flex";
@@ -201,5 +175,9 @@
         document.getElementById("overlay").style.display = "none";
     }
 </script>
+
+<%
+    session.removeAttribute("foodList");
+%>
 
 </html>
