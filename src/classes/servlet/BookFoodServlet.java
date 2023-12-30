@@ -57,6 +57,6 @@ public class BookFoodServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        resp.sendRedirect("register_success.jsp");
+        resp.sendRedirect("booking_success.jsp");
     }
 }

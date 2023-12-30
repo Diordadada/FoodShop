@@ -1,19 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>预定成功</title>
+    <title>订购成功</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa; /* Light gray background */
-            text-align: center;
+            background-image: url('images/紫天海边.png'); /* 设置背景图片的URL */
+            background-size: cover;
+            background-position: center;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+        }
+
+        .center-container {
+            text-align: center;
+            color: #333;
         }
 
         .success-message {
@@ -30,18 +35,21 @@
 </head>
 <body>
 
-<%
-    String bookingSuccessMessage = (String) request.getAttribute("bookingSuccessMessage");
-    if (bookingSuccessMessage != null) {
-%>
-<div class="success-message">
-    <%= bookingSuccessMessage %>
-</div>
-<%
-    }
-%>
+<div class="center-container">
+    <%
+        String bookingSuccessMessage = (String) request.getAttribute("bookingSuccessMessage");
+        if (bookingSuccessMessage != null) {
+    %>
+    <div class="success-message">
+        <%= bookingSuccessMessage %>
+    </div>
+    <%
+        }
+    %>
 
-<div class="countdown" id="countdown">返回首页：5</div>
+    <h1>订购成功！</h1>
+    <div class="countdown" id="countdown">返回食材市场：5</div>
+</div>
 
 <script>
     // 页面加载后开始倒计时
@@ -53,7 +61,7 @@
         countdownElement.textContent = '返回食材市场：' + countdown;
 
         if (countdown <= 0) {
-            // 在倒计时结束后跳转到首页
+            // 在倒计时结束后跳转到食材市场
             window.location.href = 'foods.jsp';
         } else {
             // 继续倒计时

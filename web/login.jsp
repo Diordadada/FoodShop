@@ -20,7 +20,7 @@
         .login-container {
             width: 30%;
             padding: 20px;
-            background-color: rgba(240, 248, 255, 0.5); /* 背景颜色，包括透明度 */
+            background-color: rgba(240, 248, 255, 0.7); /* 背景颜色，包括透明度 */
             backdrop-filter: blur(5px); /* 虚化效果，值可以调整 */
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -79,7 +79,7 @@
 <body>
 
 <div class="login-container">
-    <h1>食材订购系统</h1>
+    <h1>登录</h1>
     <form action="login" method="post">
         <div class="input-group">
             <label for="username">用户名：</label>

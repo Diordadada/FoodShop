@@ -13,15 +13,20 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f1f1f1;
+            background-image: url('images/紫天海边.png'); /* 设置背景图片的URL */
+            background-size: cover;
+            background-position: center;
+            display: flex;
             text-align: center;
+            height: 100vh;
         }
 
         .order-container {
             width: 80%;
             margin: 5% auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(240, 248, 255, 0.7);
+            backdrop-filter: blur(5px);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow-y: auto; /* Add scrollbar if needed */

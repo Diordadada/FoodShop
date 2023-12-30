@@ -9,7 +9,9 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f1f1f1;
+            background-image: url('images/紫天海边.png'); /* 设置背景图片的URL */
+            background-size: cover;
+            background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -19,7 +21,8 @@
         .register-container {
             width: 30%;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(240, 248, 255, 0.7);
+            backdrop-filter: blur(5px);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
@@ -75,7 +78,7 @@
 <body>
 
 <div class="register-container">
-    <h1>食材订购系统 - 注册</h1>
+    <h1>注册</h1>
     <form action="register" method="post">
         <div class="input-group">
             <label for="name">店铺名：</label>

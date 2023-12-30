@@ -4,37 +4,45 @@
 <%@ page import="com.mysql.cj.Session" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>食材市场</title>
+    <title>食材订购系统-食材市场</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa; /* Light gray background */
-            text-align: center;
+            background-image: url('images/紫天海边.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .market-container {
             width: 80%;
             margin: 5% auto;
+            overflow-y: auto;
+            max-height: 80vh;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+            flex-wrap: wrap; /* 设置为 wrap，让元素在父容器内换行 */
+            justify-content: space-around; /* 水平方向居中对齐 */
         }
 
         .ingredient-card {
-            width: 200px;
-            margin: 20px;
+            width: calc(25% - 20px); /* 计算三个食材卡片在一行的宽度，减去 margin */
+            margin: 10px;
             padding: 15px;
-            background-color: #ffffff; /* White background */
+            background-color: rgba(240, 248, 255, 0.7);
+            backdrop-filter: blur(10px);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer; /* 添加这一行以改变鼠标样式为指针 */
+            cursor: pointer;
         }
 
         .ingredient-card:hover {
@@ -71,6 +79,7 @@
             color: #555;
             margin-top: 5px;
         }
+
         .overlay {
             display: none;
             position: fixed;
@@ -104,73 +113,66 @@
 %>
 
 <div class="market-container">
-
     <%
         if(foodList != null && !foodList.isEmpty()) {
             for(Food food : foodList) {
-                out.println("<div class=\"ingredient-card\" food-name=\"" + food.getName() + "\">" +
-                        "        <img class=\"ingredient-image\" src=\"" + food.getPath() + "\" alt=\"" + food.getPath() + "\">\n" +
-                        "        <div class=\"ingredient-name\">" + food.getName() + "</div>\n" +
-                        "        <div class=\"ingredient-type\">" + food.getStyle() + "</div>\n" +
-                        "        <div class=\"ingredient-price\">价格：¥" + food.getPrice() + "/斤</div>\n" +
-                        "        <div class=\"ingredient-stock\">库存量：" + food.getStock() + "斤</div>\n" +
-                        "    </div>");
+    %>
+    <div class="ingredient-card" food-name="<%= food.getName() %>">
+        <img class="ingredient-image" src="<%= food.getPath() %>" alt="<%= food.getPath() %>">
+        <div class="ingredient-name"><%= food.getName() %></div>
+        <div class="ingredient-type"><%= food.getStyle() %></div>
+        <div class="ingredient-price">价格：¥<%= food.getPrice() %>/斤</div>
+        <div class="ingredient-stock">库存量：<%= food.getStock() %>斤</div>
+    </div>
+    <%
             }
         }
     %>
+</div>
 
 <%--  弹出框  --%>
-    <div class="overlay" id="overlay">
-        <div class="popup" id="popup">
-            <img id="popup-image" src="" alt="Food Image" style="max-width: 100%; max-height: 300px; border-radius: 8px;">
-            <h2 id="popup-name">食材名</h2>
-            <p id="popup-type">食材类型</p>
-            <p id="popup-price">价格：¥</p>
-            <p id="popup-stock">库存量：</p>
-            <form id="book-food" action="book_food" method="post">
-                <label for="quantity">订购数量：</label>
-                <input type="number" id="quantity" name="num" required>
-                <input type="hidden" id="food" name="food" value="">
-                <br><br>
-                <button type="button" onclick="closePopup()">取消</button>
-                <button type="submit">订购</button>
-            </form>
-        </div>
+<div class="overlay" id="overlay">
+    <div class="popup" id="popup">
+        <img id="popup-image" src="" alt="Food Image" style="max-width: 100%; max-height: 300px; border-radius: 8px;">
+        <h2 id="popup-name">食材名</h2>
+        <p id="popup-type">食材类型</p>
+        <p id="popup-price">价格：¥</p>
+        <p id="popup-stock">库存量：</p>
+        <form id="book-food" action="book_food" method="post">
+            <label for="quantity">订购数量：</label>
+            <input type="number" id="quantity" name="num" required>
+            <input type="hidden" id="food" name="food" value="">
+            <br><br>
+            <button type="button" onclick="closePopup()">取消</button>
+            <button type="submit">订购</button>
+        </form>
     </div>
-
 </div>
 
 </body>
 
 <script>
-    // 获取所有 ingredient-card 元素
     var ingredientCards = document.querySelectorAll(".ingredient-card");
 
-    // 为每个 ingredient-card 添加点击事件监听器
     ingredientCards.forEach(function(card) {
         card.addEventListener("click", function() {
-            // 获取食材的相关信息
             var name = card.querySelector(".ingredient-name").innerText;
             var type = card.querySelector(".ingredient-type").innerText;
             var price = card.querySelector(".ingredient-price").innerText;
             var stock = card.querySelector(".ingredient-stock").innerText;
             var imageSrc = card.querySelector(".ingredient-image").src;
 
-            // 设置弹出框中的内容
             document.getElementById("popup-name").innerText = name;
             document.getElementById("popup-type").innerText = type;
             document.getElementById("popup-price").innerText = price;
             document.getElementById("popup-stock").innerText = stock;
             document.getElementById("popup-image").src = imageSrc;
-            // 设置表单默认值（食材名）
             document.getElementById("food").value = name;
 
-            // 显示弹出框
             document.getElementById("overlay").style.display = "flex";
         });
     });
 
-    // 关闭弹出框的函数
     function closePopup() {
         document.getElementById("overlay").style.display = "none";
     }

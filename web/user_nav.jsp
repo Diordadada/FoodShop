@@ -12,17 +12,27 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f1f1f1;
-            text-align: center;
+            background-image: url('images/紫天海边.png'); /* 设置背景图片的URL */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .nav-container {
             width: 30%;
             margin: 10% auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(240, 248, 255, 0.7);
+            backdrop-filter: blur(5px);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 水平居中 */
+            justify-content: center; /* 垂直居中 */
         }
 
         h1 {
@@ -49,7 +59,7 @@
         }
 
         .welcome-message {
-            margin-top: 20px;
+            margin-top: auto; /* 将 margin-top 设置为 auto */
             font-size: 20px;
             color: #666;
         }

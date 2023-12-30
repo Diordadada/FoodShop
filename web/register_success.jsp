@@ -7,13 +7,18 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa; /* Light gray background */
-            text-align: center;
+            background-image: url('images/紫天海边.png'); /* 设置背景图片的URL */
+            background-size: cover;
+            background-position: center;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+        }
+
+        .center-container {
+            text-align: center;
+            color: #333;
         }
 
         .success-message {
@@ -30,18 +35,22 @@
 </head>
 <body>
 
-<%
-    String bookingSuccessMessage = (String) request.getAttribute("bookingSuccessMessage");
-    if (bookingSuccessMessage != null) {
-%>
-<div class="success-message">
-    <%= bookingSuccessMessage %>
-</div>
-<%
-    }
-%>
+<div class="center-container">
+    <%
+        String bookingSuccessMessage = (String) request.getAttribute("bookingSuccessMessage");
+        if (bookingSuccessMessage != null) {
+    %>
+    <div class="success-message">
+        <%= bookingSuccessMessage %>
+    </div>
+    <%
+        }
+    %>
 
-<div class="countdown" id="countdown">返回首页：5</div>
+    <h1>注册成功</h1>
+    <br>
+    <div class="countdown" id="countdown">返回登录页面：5</div>
+</div>
 
 <script>
     // 页面加载后开始倒计时

@@ -12,7 +12,9 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f1f1f1;
+            background-image: url('images/紫天海边.png'); /* 设置背景图片的URL */
+            background-size: cover;
+            background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,9 +22,10 @@
         }
 
         .profile-container {
-            width: 40%;
+            width: 30%;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(240, 248, 255, 0.7);
+            backdrop-filter: blur(5px);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
@@ -36,35 +39,20 @@
         .info-group {
             margin: 20px 0;
             text-align: left;
+            display: flex; /* 使用 Flex 布局 */
+            align-items: center; /* 垂直居中对齐 */
+            justify-content: space-between; /* 两者之间的空间平均分配 */
         }
 
         label {
-            display: block;
+            display: inline-block;
             font-size: 18px;
-            margin-bottom: 8px;
             color: #333;
         }
 
         .info-value {
             font-size: 16px;
             color: #555;
-        }
-
-        .edit-link {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 15px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #3498db;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .edit-link:hover {
-            background-color: #2980b9;
         }
     </style>
 </head>
@@ -91,12 +79,10 @@
     <div class="info-group">
         <label>密码：</label>
         <span class="info-value">********</span>
-        <a href="#" class="edit-link">修改密码</a>
     </div>
     <div class="info-group">
         <label>账户余额：</label>
         <span class="info-value">$<%=user.getBalance()%></span>
-        <a href="#" class="edit-link">充值</a>
     </div>
 </div>
 
