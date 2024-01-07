@@ -1,5 +1,6 @@
 package classes.servlet;
 
+import classes.util.Encrypt;
 import classes.util.JdbcUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,9 +24,14 @@ public class loginServlet extends HttpServlet {
 
         boolean isLogin = false; // 验证状态
         String turePwd = null; // 某 mid 的正确 pwd
+        String status = null; // 用户身份
 
         String name = req.getParameter("name"); // 获取表单中的 mid, pwd
         String pwd = req.getParameter("pwd");
+        pwd = Encrypt.encrypt(pwd); // 加密
+
+        String rand = (String) req.getSession().getAttribute("rand");
+        String captcha = req.getParameter("captcha");
 
         try {
             String sql = "select * from user where name = ?";
@@ -33,20 +39,24 @@ public class loginServlet extends HttpServlet {
             if(!list.isEmpty()) {
                 for(Map map : list) {
                     turePwd = (String)map.get("pwd");
+                    status = (String)map.get("status");
                 }
             }
         }catch (Exception e) {
             e.printStackTrace();
         }
 
-        if(pwd.equals(turePwd)) {
+        if(pwd.equals(turePwd) && captcha.equalsIgnoreCase(rand)) {
             isLogin = true;
         }
 
         if(isLogin) {
             req.getSession().setAttribute("name", name); // 保存 sessions
 
-            resp.sendRedirect("user_nav.jsp"); // 跳转
+            if(status.equals("商铺"))
+                resp.sendRedirect("user_nav.jsp"); // 跳转
+            if(status.equals("管理员"))
+                resp.sendRedirect("admin_nav.jsp");
         } else {
             resp.sendRedirect("error.jsp");
         }

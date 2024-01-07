@@ -89,6 +89,10 @@
             <label for="password">密码：</label>
             <input type="password" id="password" name="pwd" placeholder="请输入密码" required>
         </div>
+        <div class="input-group">
+            <label for="password">验证码：</label>
+            <input type="text" name="captcha" maxlength="4" size="4"><img src="image.jsp">
+        </div>
         <button type="submit" class="login-button">登录</button>
     </form>
     <a href="register.jsp" class="register-link">没有账号？点击这里注册</a>

@@ -51,7 +51,7 @@
 <body>
 
 <div class="error-container">
-    <p>使用系统前，请先登录</p>
+    <p>密码错误或验证码错误</p>
     <a href="login.jsp" class="login-link">返回登录页面</a>
 </div>
 
