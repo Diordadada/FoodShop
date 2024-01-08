@@ -46,9 +46,6 @@ public class UploadServlet extends HttpServlet {
         String filePath = "C:/Users/15223/Desktop/Web/FoodShop/web/images/" + fileName;
         String path = "images/" + fileName;
 
-        System.out.println(filePath);
-        System.out.println(path);
-
         try (InputStream fileInputStream = filePart.getInputStream()) {
             // 将文件保存到服务器的文件系统中
             Files.copy(fileInputStream, Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
