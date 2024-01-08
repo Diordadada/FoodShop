@@ -112,7 +112,7 @@
     <%
         int page2 = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
         int num = 0;
-        int row = 6;
+        int row = 5;
 
         if(bookList != null && !bookList.isEmpty()) {
             for(Book book : bookList) {
