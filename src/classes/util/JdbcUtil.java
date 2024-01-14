@@ -14,7 +14,7 @@ public class JdbcUtil {
     static {
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream("D:/db.properties"));
+            properties.load(new FileInputStream("D://db.properties"));
             driver = properties.getProperty("driver");
             url = properties.getProperty("url");
             user = properties.getProperty("user");
