@@ -28,8 +28,8 @@ public class RegisterServlet extends HttpServlet {
         pwd = Encrypt.encrypt(pwd);
 
         try {
-            String sql = "insert into user (name, phone, pwd, balance) values (?,?,?,?)";
-            JdbcUtil.executeUpdate(sql, name, phone, pwd, 0.0);
+            String sql = "insert into user (name, phone, pwd, balance, status) values (?,?,?,?,?)";
+            JdbcUtil.executeUpdate(sql, name, phone, pwd, 0.0, "商铺");
         } catch (Exception e) {
             e.printStackTrace();
         }
